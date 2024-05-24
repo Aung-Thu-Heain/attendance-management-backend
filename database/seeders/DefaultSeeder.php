@@ -18,11 +18,7 @@ class DefaultSeeder extends Seeder
         $roles = ['admin','teacher','student'];
         $permissions = ['create','read','update','delete'];
         $classes = ['Kindergarten','Grade-1','Grade-2','Grade-3','Grade-4','Grade-5','Grade-6','Grade-7','Grade-8','Grade-9','Grade-10','Grade-11','Grade-12'];
-        User::create([
-            'name'=>"admin",
-            'email'=>"admin@gmail.com",
-            'password'=> bcrypt('password'),
-        ]);
+
 
         foreach ($roles as $role) {
             Role::create([
@@ -42,6 +38,116 @@ class DefaultSeeder extends Seeder
             ]);
         }
 
-        User::find(1)->roles()->attach(Role::all());
+        $users = [
+                [
+                    'name'=>"admin",
+                    'email'=>"admin@gmail.com",
+                    'password'=> bcrypt('password'),
+                    'classroom_id' => 1,
+                    'role' => 1,
+                ],
+                [
+                    'name'=>"teacher",
+                    'email'=>"teacher@gmail.com",
+                    'password'=> bcrypt('password'),
+                    'classroom_id' => 1,
+                    'role' => 2,
+                ],
+                [
+                    'name'=>"teacher1",
+                    'email'=>"teacher1@gmail.com",
+                    'password'=> bcrypt('password'),
+                    'classroom_id' => 1,
+                    'role' => 2,
+                ],
+                [
+                    'name'=>"teacher2",
+                    'email'=>"teacher2@gmail.com",
+                    'password'=> bcrypt('password'),
+                    'classroom_id' => 1,
+                    'role' => 2,
+                ],
+                [
+                    'name'=>"teacher3",
+                    'email'=>"teacher3@gmail.com",
+                    'password'=> bcrypt('password'),
+                    'classroom_id' => 1,
+                    'role' => 2,
+                ],
+                [
+                    'name'=>"teacher4",
+                    'email'=>"teacher4@gmail.com",
+                    'password'=> bcrypt('password'),
+                    'classroom_id' => 1,
+                    'role' => 2,
+                ],
+                [
+                    'name'=>"teacher5",
+                    'email'=>"teacher5@gmail.com",
+                    'password'=> bcrypt('password'),
+                    'classroom_id' => 1,
+                    'role' => 2,
+                ],
+                [
+                    'name'=>"student",
+                    'email'=>"student@gmail.com",
+                    'password'=> bcrypt('password'),
+                    'classroom_id' => 1,
+                    'role' => 3,
+                ],
+                [
+                    'name'=>"student1",
+                    'email'=>"student1@gmail.com",
+                    'password'=> bcrypt('password'),
+                    'classroom_id' => 1,
+                    'role' => 3,
+                ],
+                [
+                    'name'=>"student2",
+                    'email'=>"student2@gmail.com",
+                    'password'=> bcrypt('password'),
+                    'classroom_id' => 1,
+                    'role' => 3,
+                ],
+                [
+                    'name'=>"student3",
+                    'email'=>"student3@gmail.com",
+                    'password'=> bcrypt('password'),
+                    'classroom_id' => 1,
+                    'role' => 3,
+                ],
+                [
+                    'name'=>"student4",
+                    'email'=>"student4@gmail.com",
+                    'password'=> bcrypt('password'),
+                    'classroom_id' => 1,
+                    'role' => 3,
+                ],
+                [
+                    'name'=>"student5",
+                    'email'=>"student5@gmail.com",
+                    'password'=> bcrypt('password'),
+                    'classroom_id' => 1,
+                    'role' => 3,
+                ],
+                [
+                    'name'=>"student6",
+                    'email'=>"student6@gmail.com",
+                    'password'=> bcrypt('password'),
+                    'classroom_id' => 1,
+                    'role' => 3,
+                ],
+
+            ];
+
+        foreach($users as $user){
+            User::factory()->create([
+                "name"=>$user['name'],
+                "email"=>$user['email'],
+                "password"=>$user['password'],
+                "classroom_id"=>$user['classroom_id'],
+            ])->roles()->attach($user['role']);
+        }
+
     }
 }

@@ -46,14 +46,14 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function roles():BelongsToMany
-    {
-        return $this->belongsToMany(Role::class);
-    }
-
     public function classroom():BelongsTo
     {
         return $this->belongsTo(Classroom::class);
+    }
+
+    public function roles():BelongsToMany
+    {
+        return $this->belongsToMany(Role::class);
     }
 
     public function teacherInfo():HasOne
