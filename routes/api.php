@@ -4,8 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
-
-
+use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +22,11 @@ Route::post('/login',[LoginController::class,'login']);
 
 
 Route::middleware('auth:sanctum')->group(function () {
+    // user route
     Route::get('/users',[UserController::class,'index']);
+    //classroom route
+    Route::get('/classrooms',[ClassroomController::class,'index']);
+    //role route
+    Route::get('/roles',[RoleController::class,'index']);
 });
 

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Classroom;
+use App\Models\Permission;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -15,22 +16,31 @@ class DefaultSeeder extends Seeder
      */
     public function run(): void
     {
-        $roles = ['admin','teacher','student'];
-        $permissions = ['create','read','update','delete'];
+        $permissions = ['user_create','user_read','user_update','user_delete','class_create','class_read','class_update','class_delete','role_create','role_read','role_update','role_delete'];
         $classes = ['Kindergarten','Grade-1','Grade-2','Grade-3','Grade-4','Grade-5','Grade-6','Grade-7','Grade-8','Grade-9','Grade-10','Grade-11','Grade-12'];
 
-
-        foreach ($roles as $role) {
-            Role::create([
-                'name'=>$role,
-            ]);
-        }
-
-        foreach ($permissions as $permission) {
-            Role::find(1)->permissions()->create([
+        foreach($permissions as $permission){
+            Permission::create([
                 'name'=>$permission,
             ]);
         }
+
+        $adminPermissions = Permission::all()->pluck('id');
+         Role::create([
+            'name'=>"admin",
+        ])->permissions()->sync($adminPermissions);
+
+        $teacherPermissions = Permission::where('name', 'not like', '%_delete%')->pluck('id');
+        Role::create([
+            'name'=>"teacher",
+        ])->permissions()->sync($teacherPermissions);
+
+        $studentPermissions = Permission::where('name', 'not like', '%_create%')->where('name','not like','%_update%')->where('name','not like','%_delete%')->pluck('id');
+        Role::create([
+            'name'=>"student",
+        ])->permissions()->sync($studentPermissions);
+
+
 
         foreach($classes as $class){
             Classroom::create([
