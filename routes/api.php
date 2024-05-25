@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 
 /*
@@ -20,7 +21,6 @@ use App\Http\Controllers\RoleController;
 
 Route::post('/login',[LoginController::class,'login']);
 
-
 Route::middleware('auth:sanctum')->group(function () {
     // user route
     Route::get('/users',[UserController::class,'index']);
@@ -28,5 +28,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/classrooms',[ClassroomController::class,'index']);
     //role route
     Route::get('/roles',[RoleController::class,'index']);
+    Route::put('/roles/update/{id}',[RoleController::class,'update']);
+    //permission route
+    Route::get('/permissions',[PermissionController::class,'index']);
+    //class route
+    Route::get('/classes',[ClassroomController::class,'index']);
 });
 

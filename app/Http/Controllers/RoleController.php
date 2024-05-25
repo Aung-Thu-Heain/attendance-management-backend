@@ -10,9 +10,8 @@ use Illuminate\Http\Request;
 class RoleController extends Controller
 {
     public function index(){
-
         try{
-            $classrooms = RoleResource::collection(Role::all());
+            $classrooms = RoleResource::collection(Role::with('permissions')->get());
             return response()->json([
                     'roles' =>  $classrooms,
             ],200);
@@ -21,5 +20,9 @@ class RoleController extends Controller
                 'message' => $e->getMessage()
             ],500);
         }
+    }
+
+    public function update(Request $request, string $id){
+
     }
 }
