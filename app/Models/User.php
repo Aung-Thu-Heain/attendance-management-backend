@@ -56,13 +56,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
-    public function teacherInfo():HasOne
+    public function info():HasOne
     {
-        return $this->hasOne(TeacherInfo::class);
-    }
-
-    public function studentInfo():HasOne
-    {
-        return $this->hasOne(StudentInfo::class);
+        return $this->hasOne(Info::class);
     }
 }

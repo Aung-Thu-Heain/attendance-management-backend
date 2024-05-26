@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('teacher_infos', function (Blueprint $table) {
+        Schema::create('infos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('father_name');
-            $table->string('mother_name');
             $table->date('date_of_birth');
-            $table->string('education');
-            $table->string('nrc_number');
-            $table->string('phone_number');
-            $table->date('start_date');
+            $table->string('nrc_number')->nullable();
+            $table->string('contact_number');
+            $table->string('education')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('roll_number')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('teacher_infos');
+        Schema::dropIfExists('infos');
     }
 };
