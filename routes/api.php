@@ -27,6 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // user route
     Route::get('/users',[UserController::class,'index']);
     Route::post('/users/create',[UserController::class,'create']);
+    Route::delete('/users/delete/{id}',[UserController::class,'destroy']);
     //classroom route
     Route::get('/classrooms',[ClassroomController::class,'index']);
     //role route

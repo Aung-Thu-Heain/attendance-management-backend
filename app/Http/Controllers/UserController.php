@@ -49,6 +49,7 @@ class UserController extends Controller
             ], 422);
         }
 
+       try{
         DB::transaction(function () use($request){
             $user = User::create([
                 'name' => $request->name,
@@ -72,8 +73,23 @@ class UserController extends Controller
         });
 
         return response()->json([
-           'message' => 'User created successfully',
-        ],201);
+            'message' => 'User created successfully',
+         ],201);
 
+       }catch(Exception $e){
+         return response()->json([
+              'message' => $e->getMessage()
+           ]);
+       }
+
+    }
+
+    public function destroy($id){
+        $user = User::find($id);
+        $user->delete();
+
+        return response()->json([
+           'message' => 'User deleted successfully',
+        ],200);
     }
 }
