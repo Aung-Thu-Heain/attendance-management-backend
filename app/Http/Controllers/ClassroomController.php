@@ -22,4 +22,37 @@ class ClassroomController extends Controller
             ],500);
         }
     }
+
+    public function create(Request $request){
+          Classroom::create([
+            'name'=>$request->name,
+         ]);
+
+         return response()->json([
+            'message'=>'Classroom created successfully',
+         ],200);
+    }
+
+    public function update(Request $request,$id){
+        $classroom = Classroom::find($id);
+
+       if(!$classroom){
+           return response()->json([
+              'message' => 'Classroom not found'
+           ],404);
+       }
+
+       $classroom->name = $request->name;
+       $classroom->save();
+
+       return response()->json(['successfully updated'],200);
+    }
+
+    public function destroy($id){
+        $classroom = Classroom::find($id);
+        $classroom->delete();
+        return response()->json([
+            "message"=>"Classroom deleted successfully",
+        ],200);
+    }
 }

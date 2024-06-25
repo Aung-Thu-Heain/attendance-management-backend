@@ -39,5 +39,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/permissions',[PermissionController::class,'index']);
     //class route
     Route::get('/classes',[ClassroomController::class,'index']);
+    Route::post('classes/create',[ClassroomController::class,'create']);
+    Route::put('/classes/update/{id}',[ClassroomController::class,'update']);
+    Route::delete("/classes/delete/{id}",[ClassroomController::class,'destroy']);
+
+    //auth route
+    Route::get('/logout',[LoginController::class,'logout']);
 });
 
